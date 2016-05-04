@@ -11,6 +11,8 @@ public abstract class KPSPeli implements Peli {
         String ekanSiirto;
         String tokanSiirto;
         
+        System.out.println("peli loppuu kun pelaaja antaa virheellisen siirron eli jonkun muun kuin k, p tai s");
+        
         do {
             System.out.print("Ensimmäisen pelaajan siirto: ");
             ekanSiirto = scanner.nextLine();
