@@ -1,17 +1,26 @@
 package ohtu.kivipaperisakset;
 
-import java.util.Scanner;
-
 public class KPSValikko {
-    private static final Scanner scanner = new Scanner(System.in);
+    private static final IO io = new KonsoliIO();
     
     public static void aloita() {
+        KPSPeli peli;
+        boolean lopeta = false;
+        
         do {
-            System.out.println("\nValitse pelataanko"
+            io.print("\nValitse pelataanko"
                     + "\n (a) ihmistä vastaan "
                     + "\n (b) tekoälyä vastaan"
                     + "\n (c) parannettua tekoälyä vastaan"
                     + "\nmuilla valinnoilla lopetataan");
-        } while(KPSTehdas.uusiPeli(scanner.nextLine()));
+            
+            peli = KPSTehdas.uusiPeli(io.read());
+            
+            if (peli != null)
+                peli.pelaa();
+            else
+                lopeta = true;
+            
+        } while(!lopeta);
     }
 }

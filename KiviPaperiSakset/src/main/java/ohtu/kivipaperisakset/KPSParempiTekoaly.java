@@ -2,16 +2,18 @@ package ohtu.kivipaperisakset;
 
 public class KPSParempiTekoaly extends KPSPeli {
     
-    TekoalyParannettu tekoaly;
+    private TekoalyParannettu tekoaly;
     
-    public KPSParempiTekoaly() {
-        this.tekoaly = new TekoalyParannettu(20);
+    public KPSParempiTekoaly(IO io, Kirjuri kirjuri, int muistinKoko) {
+        super(io, kirjuri);
+        
+        this.tekoaly = new TekoalyParannettu(muistinKoko);
     }
 
     @Override
-    protected String toisenPelaajanSiirto() {
+    protected String tokanVuoro() {
         String tokanSiirto = tekoaly.annaSiirto();
-        System.out.println("Tietokone valitsi: " + tokanSiirto);
+        io.print("Tietokone valitsi: " + tokanSiirto);
         return tokanSiirto;
     }
 }

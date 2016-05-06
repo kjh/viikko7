@@ -1,36 +1,32 @@
 package ohtu.kivipaperisakset;
 
-import java.util.Scanner;
-
-public abstract class KPSPeli implements Peli {
-     static final Scanner scanner = new Scanner(System.in);
+public abstract class KPSPeli {
+    protected IO io;
+    private Kirjuri kirjuri;
     
-    @Override
+    public KPSPeli(IO io, Kirjuri kirjuri) {
+        this.io = io;
+        this.kirjuri = kirjuri;
+    }
+    
     public void pelaa() {
-        Tuomari tuomari = new Tuomari();
         String ekanSiirto;
         String tokanSiirto;
         
-        System.out.println("peli loppuu kun pelaaja antaa virheellisen siirron eli jonkun muun kuin k, p tai s");
-        
         do {
-            System.out.print("Ensimmäisen pelaajan siirto: ");
-            ekanSiirto = scanner.nextLine();
-         
-            tokanSiirto = toisenPelaajanSiirto();
-            
-            tuomari.kirjaaSiirto(ekanSiirto, tokanSiirto);
-            System.out.println(tuomari);
-            System.out.println();
-            
+            io.print("peli loppuu kun pelaaja antaa virheellisen siirron eli jonkun muun kuin k, p tai s");
+            io.print("Ensimmäisen pelaajan siirto: ");
+            ekanSiirto = io.read();
+            tokanSiirto = tokanVuoro();
+            kirjuri.kirjaaSiirto(ekanSiirto, tokanSiirto);
+            io.print(kirjuri);
         } while (onkoOkSiirto(ekanSiirto) && onkoOkSiirto(tokanSiirto));
 
-        System.out.println();
-        System.out.println("Kiitos!");
-        System.out.println(tuomari);
+        io.print("Kiitos!");
+        io.print(kirjuri);
     }
     
-    protected abstract String toisenPelaajanSiirto();
+    protected abstract String tokanVuoro();
     
     private static boolean onkoOkSiirto(String siirto) {
         return "k".equals(siirto) || "p".equals(siirto) || "s".equals(siirto);

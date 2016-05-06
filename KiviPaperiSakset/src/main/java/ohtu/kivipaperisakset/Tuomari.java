@@ -1,7 +1,7 @@
 package ohtu.kivipaperisakset;
 
 // Tuomari pitää kirjaa ensimmäisen ja toisen pelaajan pisteistä sekä tasapelien määrästä.
-public class Tuomari {
+public class Tuomari implements Kirjuri {
 
     private int ekanPisteet;
     private int tokanPisteet;
@@ -13,6 +13,7 @@ public class Tuomari {
         this.tasapelit = 0;
     }
 
+    @Override
     public void kirjaaSiirto(String ekanSiirto, String tokanSiirto) {
         if (tasapeli(ekanSiirto, tokanSiirto)) {
             tasapelit++;
@@ -45,6 +46,7 @@ public class Tuomari {
         return false;
     }
 
+    @Override
     public String toString() {
         String s = "Pelitilanne: " + ekanPisteet + " - " + tokanPisteet + "\n"
                 + "Tasapelit: " + tasapelit;

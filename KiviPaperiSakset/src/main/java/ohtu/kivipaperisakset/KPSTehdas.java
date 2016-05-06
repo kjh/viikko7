@@ -2,18 +2,15 @@ package ohtu.kivipaperisakset;
 
 public class KPSTehdas {
     
-    public static boolean uusiPeli(String valinta) {
+    public static KPSPeli uusiPeli(String valinta) {
         if (valinta.equals("a")) {
-            (new KPSPelaajaVsPelaaja()).pelaa();
-            return true;
+            return new KPSPelaajaVsPelaaja(new KonsoliIO(), new Tuomari());
         } else if (valinta.equals("b")) {
-            (new KPSTekoaly()).pelaa();
-            return true;
+            return new KPSTekoaly(new KonsoliIO(), new Tuomari());
         } else if (valinta.equals("c")) {
-            (new KPSParempiTekoaly()).pelaa();
-            return true;
-        }
+            return new KPSParempiTekoaly(new KonsoliIO(), new Tuomari(), 20);
+        } 
         
-        return false;
+        return null;
     }
 }
